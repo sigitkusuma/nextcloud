@@ -1,58 +1,44 @@
-**Snap Install**
+# Nexcloud installation using Snap-Package
+
+## Snap Installation Process
+### Step 1: Install Snapd
+   - Snapd is the service that manages Snap packages on your system. To install it, use the following command:
 ```
 $ sudo apt install snapd
 ```
 
+### Step 2: Enable Snapd Socket
+- Some versions of Ubuntu may require you to enable the Snapd socket. You can do this with the following command:
 ```
-$ sudo snap version
+$ sudo systemctl enable --now snapd.socket
 ```
 
+### Step 3: Test Snap Installation
+- To verify that Snapd is installed and working correctly, you can run a test command. 
+- Try installing the hello-world snap package:
+```
+$ sudo snap install hello-world
+```
+
+- After the installation is complete, you can run the hello-world command to test the snap:
+```
+$ hello-world
+```
+- You should see a message indicating that the installation was successful.
+
+
+## Nextcloud Installation Process
+### Step 1: Install Nextcloud Snap Package
+- Now, you can install Nextcloud using the Snap package:
 ```
 $ sudo snap install nextcloud
 ```
+- This command will download and install the Nextcloud snap package along with its dependencies.
 
-```
-$ sudo snap list
-```
+### Step 2: Configure Nextcloud
+- Once the installation is complete, you need to configure Nextcloud.
+- By default, Nextcloud runs on server address.
+- You can access it using web browser.
+- Open your web browser and navigate to your server address. in this case my server address is http://192.168.1.7
 
-First, configure Uncomplicated Firewall (UFW) to allow HTTP 
-
-network traffic on the server port 80.
-```
-$ sudo ufw allow 80/tcp
-```
-
-Allow HTTPS on port 443.
-```
-$ sudo ufw allow 443/tcp
-```
-
-Restart the Firewall.
-```
-$ sudo ufw reload
-```
-
-To activate the NextCloud database and configuration file values, visit your Server IP using a web browser.
-```
-http://192.0.2.1
-Enter a username and strong password to create the first administrator account, and click Install.
-```
-
-NextCloud Snap installation page
-
-Close the web browser and switch to your server console.
-
-Using a text editor of your choice, edit the main NextCloud configuration file.
-```
-$ sudo nano /var/snap/nextcloud/current/nextcloud/config/config.php
-```
-
-Find the "trusted_domains' =>` section, and replace the Server IP with your domain name as below.
-```
-'trusted_domains' =>
-    array (
-       0 => 'nextcloud.example.com',
-     ),
-```
-
-Save and close the file.
+- Follow the on-screen instructions to set up your Nextcloud instance. You will be asked to create an admin account and configure the database settings.
